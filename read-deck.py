@@ -32,10 +32,9 @@ def replace_it(old,new,l):
 #File Read Calibre Deck find match
 #----------------------------------------------------------------
 def file_read(fn,match):
-    my_list = []
-    fileName = fn
-    if fileName:
+    if fileName := fn:
         print(fileName)
+        my_list = []
         with open(fileName, 'r') as reader:
             try:
                  found = lines_that_contain(match, reader)
@@ -53,11 +52,7 @@ def file_read(fn,match):
 #Search List of List for Match
 #----------------------------------------------------------------
 def find(value,lst):
-    #match Search
-    matching = [s for s in lst if value in s]
-    #for x in matching:
-      #print(*x)
-    return matching
+    return [s for s in lst if value in s]
    # print(*matching, sep = "\n")
 #----------------------------------------------------------------
 #Build lists of matched lines - several flavors:
@@ -81,12 +76,12 @@ def lines_that_end_with(string, fp):
    #Result1 =  CUT "act NEM" "act XCUT"
 #}
 def build_enc(list):
-  print("Translation from Caliber")
-  for x in list:
-    #print(x[0],x[2],x[4],x[6]) 
-    print(x[4] + '_ENC =  {}.enclosing({}, {})'.format(x[4], x[2], x[6]))
-    form = x[4] + "_ENC.output(" '"' + x[4] +  " Surrounds " + x[2] + " < #{'%.12g' % cut} µm\")"
-    print(form)
+    print("Translation from Caliber")
+    for x in list:
+            #print(x[0],x[2],x[4],x[6])
+        print(x[4] + f'_ENC =  {x[4]}.enclosing({x[2]}, {x[6]})')
+        form = x[4] + "_ENC.output(" '"' + x[4] +  " Surrounds " + x[2] + " < #{'%.12g' % cut} µm\")"
+        print(form)
 #----------------------------------------------------------------
 # StartGUI
 #----------------------------------------------------------------
